@@ -21,7 +21,7 @@ class Server():
         # create IPv4(AT_INET) TCP(SOCK_STREAM) socket
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 
-            # log server socket option
+            # log server socket options
             logger.debug(f"--- START Logging server socket option ---")
             for option, value in Server.get_socket_options(s).items():
                 logger.debug(f"{option}: {value}")
