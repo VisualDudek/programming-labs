@@ -31,5 +31,5 @@ class Server():
 
 
 if __name__ == "__main__":
-    tcp_echo = Server()
+    tcp_echo = Server(host='127.0.0.1', port=5000)
     tcp_echo.run()
