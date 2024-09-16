@@ -24,6 +24,8 @@ class Server():
             conn, addr = s.accept()
             with conn:
                 logger.debug(f'Connected by {addr}')
+
+                # handle multiple sequential calls from single client
                 while True:
                     data = conn.recv(1024)
                     if data:
