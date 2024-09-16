@@ -11,14 +11,15 @@ logging.basicConfig(
 
 
 class Server():
-    def __init__(self, host='127.0.0.1', port=5000):
+    def __init__(self, host='127.0.0.1', port=5000, backlog=128):
         self.host = host
         self.port = port
+        self.backlog = backlog
 
     def run(self):
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.bind((self.host, self.port))
-            s.listen()
+            s.listen(self.backlog)
             logger.info(f'Server listening on {self.host}:{self.port}')
             
             conn, addr = s.accept()
