@@ -45,8 +45,12 @@ async def run_multiple_clients(n):
 
 if __name__ == "__main__":
 # asyncio.run(tcp_echo_client('Hello World!'))
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-n', type=int, default=10, help='number of clients')
+    parser = argparse.ArgumentParser(
+        description="This is a tester program for TCP echo server."
+    )
+    parser.add_argument('-n', type=int, default=10, help='Number of clients (default: %(default)s)')
+    parser.add_argument('--host', type=str, default='127.0.0.1', help='Host to bind the server (default: %(default)s)')
+    parser.add_argument('--port', type=int, default=5000, help='Port to bind the server (default: %(default)s)')
     args = parser.parse_args()
 
     asyncio.run(run_multiple_clients(n=args.n))
