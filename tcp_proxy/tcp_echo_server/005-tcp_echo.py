@@ -3,6 +3,7 @@ import logging
 from typing import Dict, Union
 import signal
 import sys
+import threading
 
 
 logger = logging.getLogger(__name__)
@@ -14,11 +15,20 @@ logging.basicConfig(
 
 
 class Server():
-    def __init__(self, host='127.0.0.1', port=5000, backlog=128):
+    def __init__(
+            self, 
+            host='127.0.0.1', 
+            port=5000, 
+            backlog=128,
+            max_threads=10,
+            ):
         self.host: str = host
         self.port: int = port
         self.backlog: int = backlog
+        # need this for gracefull shoutdon via signal handling
         self.server_socket: socket = None
+        # thread pool handling via semaphore + acquire()/release()
+        self.semaphore = threading.Semaphore(max_threads)
 
     def run(self):
         # create IPv4(AT_INET) TCP(SOCK_STREAM) socket
