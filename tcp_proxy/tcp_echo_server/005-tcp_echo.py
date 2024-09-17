@@ -60,6 +60,9 @@ class Server():
             self.semaphore.acquire()
             conn_handler = threading.Thread(target=self.handle_conn , args=(conn,))
             conn_handler.start()    
+            # thre is endles while True loop but still join thread to main thread
+            # NOOOO big mistake ;) don't do it, in such manner you will break cuncurrency
+            # conn_handler.join()
 
             # not recommended due to acces to priv value
             logger.debug(f"Running {self.max_threads - self.semaphore._value} no of threads")
