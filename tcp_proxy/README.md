@@ -18,7 +18,7 @@ Test with:
 
 ## Structure
 
-### `tcp_echo_server`
+### `tcp_echo_server/`
 - `001-simple_one_echo.py` - basic echo server.
   - no logs (TODO)-> logging module
   - no configuration -> OOP approach, create Server class and keep config in attributes, NEXT Server class as singleton 
@@ -46,3 +46,8 @@ Test with:
   - closing client conn at gracefull shutdown
   - DEBUG: when tested with 1k it get timout and when gracefull shutdown -> hangs, it seems that thread is hanging, check with `ps -p <PID> -T -f`
   - added timeout on clinet socket
+
+### `test/`
+1. x
+2. `002`:
+   - refactor code to sleep between each task to not run all conn at once
