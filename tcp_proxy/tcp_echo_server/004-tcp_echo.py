@@ -52,7 +52,7 @@ class Server():
                         break
 
 
-    def shutdown(self, signum, frame):
+    def shutdown(self, signum, frame) -> None:
         logger.info("Server shoutdown")
         self.server_socket.close()
         sys.exit(0)
