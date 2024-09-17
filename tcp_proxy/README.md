@@ -45,3 +45,4 @@ Test with:
   - logging Thread ID and current running treads (based on semaphore count)
   - closing client conn at gracefull shutdown
   - DEBUG: when tested with 1k it get timout and when gracefull shutdown -> hangs, it seems that thread is hanging, check with `ps -p <PID> -T -f`
+  - added timeout on clinet socket
