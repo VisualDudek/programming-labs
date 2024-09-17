@@ -8,8 +8,12 @@
 `tcp_proxy` - dir with increasing versions of tcp_proxy
 
 Test with:
-- `nc`: `nc localhost 5000` or `echo "hello" |nc localhost 5000`
-- `telnet`
+1. manual:
+    - `nc`: `nc localhost 5000` or `echo "hello" |nc localhost 5000`
+    - `telnet`
+2. auto:
+- `./test/001-test_tcp.py` python script, run with `-h` flag to get help
+- 
 
 ## Structure
 
@@ -31,3 +35,12 @@ Test with:
   - added Server static method get_socket_options
   - log server socket options
   - TODO: DEBUG: what each socket option do?
+- `004-x`:
+  - handle multiple conn in sequential manner.
+  - added SIGING handling to gracefull shutdown
+- `005-x`:
+  - concurrency: threading, pool count handle by semaphore + acquire()/release()
+  - added Server.handle_conn method
+  - logging Thread ID and current running treads (based on semaphore count)
+  - closing client conn at gracefull shutdown
+  - DEBUG: when tested with 1k it get timout and when gracefull shutdown -> hangs, it seems that thread is hanging, check with `ps -p <PID> -T -f`
