@@ -6,6 +6,7 @@
 `test/asyncio_tcp_client.py` - test proxy with runing n connections with random lowercase string
 
 `tcp_proxy` - dir with increasing versions of tcp_proxy
+`ss -ta |wc -l` - count number of all TCP sockets
 
 Test with:
 1. manual:
