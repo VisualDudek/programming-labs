@@ -25,6 +25,7 @@ class Server():
         self.host: str = host
         self.port: int = port
         self.backlog: int = backlog
+        self.max_threads = max_threads
         # need this for gracefull shoutdon via signal handling
         self.server_socket: socket = None
         self.client_sockets =[]
@@ -54,6 +55,9 @@ class Server():
             self.semaphore.acquire()
             conn_handler = threading.Thread(target=self.handle_conn , args=(conn,))
             conn_handler.start()    
+
+            # not recommended due to acces to priv value
+            logger.debug(f"Running {self.max_threads - self.semaphore._value} no of threads")
 
 
     def handle_conn(self, conn):
