@@ -57,6 +57,8 @@ class Server():
 
 
     def handle_conn(self, conn):
+        thread_id = threading.get_ident()
+        logger.debug(f"Connection hadled by Thread ID: {thread_id}")
         try:
             while True:
                 data = conn.recv(1024)
