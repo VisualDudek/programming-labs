@@ -27,6 +27,8 @@ class Server():
         self.backlog: int = backlog
         # need this for gracefull shoutdon via signal handling
         self.server_socket: socket = None
+        self.client_sockets =[]
+
         # thread pool handling via semaphore + acquire()/release()
         self.semaphore = threading.Semaphore(max_threads)
 
@@ -43,19 +45,30 @@ class Server():
         # attach SIGINT callback
         signal.signal(signal.SIGINT, self.shutdown)
 
-        # main server loop for multiple connection handling in sequential manner.
         while True:
             conn, addr = self.server_socket.accept()
-            with conn:
-                logger.debug(f'Connected by {addr}')
+            self.client_sockets.append(conn)
+            logger.debug(f'Connected by {addr}')
 
-                # handle multiple sequential calls from single client
-                while True:
-                    data = conn.recv(1024)
-                    if data:
-                        conn.sendall(data)
-                    else: 
-                        break
+            # Create and run thread
+            self.semaphore.acquire()
+            conn_handler = threading.Thread(target=self.handle_conn , args=(conn,))
+            conn_handler.start()    
+
+
+    def handle_conn(self, conn):
+        try:
+            while True:
+                data = conn.recv(1024)
+                if data:
+                    conn.sendall(data)
+                else:
+                    break
+        finally:
+            conn.close()
+            self.client_sockets.remove(conn)
+            self.semaphore.release()
+
 
     def log_server_socket_options(self) -> None:
         # log server socket options
