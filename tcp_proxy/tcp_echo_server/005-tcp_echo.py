@@ -80,6 +80,10 @@ class Server():
 
     def shutdown(self, signum, frame) -> None:
         logger.info("Server shoutdown")
+        logger.info("Closing client conn")
+        for conn in self.client_sockets:
+            conn.close()
+        logger.info("Closing Server socket")
         self.server_socket.close()
         sys.exit(0)
 
