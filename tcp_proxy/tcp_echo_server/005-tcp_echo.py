@@ -68,15 +68,20 @@ class Server():
             logger.debug(f"Running {self.max_threads - self.semaphore._value} no of threads")
 
 
-    def handle_conn(self, conn):
+    def handle_conn(self, conn, timeout=2.0) -> None:
         thread_id = threading.get_ident()
         logger.debug(f"Connection hadled by Thread ID: {thread_id}")
+        conn.settimeout(timeout)
         try:
             while True:
-                data = conn.recv(1024)
-                if data:
-                    conn.sendall(data)
-                else:
+                try:
+                    data = conn.recv(1024)
+                    if data:
+                        conn.sendall(data)
+                    else:
+                        break
+                except socket.timeout:
+                    logger.debug(f"Timeout on connection")
                     break
         finally:
             conn.close()
