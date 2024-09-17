@@ -4,7 +4,10 @@ from typing import Dict, Union
 import signal
 import sys
 import threading
+import os
 
+
+pid = os.getpid()
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(
@@ -36,6 +39,8 @@ class Server():
     def run(self):
         # create IPv4(AT_INET) TCP(SOCK_STREAM) socket
         self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        # TODO: Why do I need this ???
+        self.server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
         self.log_server_socket_options()
 
@@ -85,7 +90,7 @@ class Server():
 
 
     def shutdown(self, signum, frame) -> None:
-        logger.info("Server shoutdown")
+        logger.info(f"Server shoutdown, main PID: {pid}")
         logger.info("Closing client conn")
         for conn in self.client_sockets:
             conn.close()
