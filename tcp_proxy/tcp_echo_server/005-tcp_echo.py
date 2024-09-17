@@ -34,11 +34,7 @@ class Server():
         # create IPv4(AT_INET) TCP(SOCK_STREAM) socket
         self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-        # log server socket options
-        logger.debug(f"--- START Logging server socket option ---")
-        for option, value in Server.get_socket_options(self.server_socket).items():
-            logger.debug(f"{option}: {value}")
-        logger.debug(f"--- END Logging server socket option ---")
+        self.log_server_socket_options()
 
         self.server_socket.bind((self.host, self.port))
         self.server_socket.listen(self.backlog)
@@ -60,6 +56,13 @@ class Server():
                         conn.sendall(data)
                     else: 
                         break
+
+    def log_server_socket_options(self) -> None:
+        # log server socket options
+        logger.debug(f"--- START Logging server socket option ---")
+        for option, value in Server.get_socket_options(self.server_socket).items():
+            logger.debug(f"{option}: {value}")
+        logger.debug(f"--- END Logging server socket option ---")
 
 
     def shutdown(self, signum, frame) -> None:
