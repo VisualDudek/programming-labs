@@ -6,10 +6,10 @@ logger = logging.getLogger(__name__)
 
 
 def log_socket_optioins(d: Dict[str, Union[int, str]]) -> None:
-    logger.debug(f"--- START Logging socket option ---")
+    logger.debug("--- START Logging socket option ---")
     for option, value in d.items():
         logger.debug(f"{option}: {value}")
-    logger.debug(f"--- END Logging socket option ---")
+    logger.debug("--- END Logging socket option ---")
 
 
 def get_socket_options(sock: socket.socket) -> Dict[str, Union[int, str]]:
