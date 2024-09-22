@@ -9,9 +9,11 @@ import selectors
 import socket
 import logging
 from typing import Optional
+from helper import log_socket_optioins, get_socket_options
+
 
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.DEBUG,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     encoding='utf-8',
 )
@@ -28,6 +30,9 @@ class Server():
     def run(self) -> None:
         self.sel = selectors.DefaultSelector()
         self.server_socket = socket.socket()  # Why not AT_INET and SOCK_STREAM?
+
+        log_socket_optioins(get_socket_options(self.server_socket))
+    
         self.server_socket.bind((self.host, self.port))
         self.server_socket.listen()
         self.server_socket.setblocking(False)
