@@ -25,6 +25,7 @@ def get_socket_options(sock: socket.socket) -> Dict[str, Union[int, str]]:
         (socket.SOL_SOCKET, socket.SO_SNDBUF, "SO_SNDBUF"),
         (socket.SOL_SOCKET, socket.SO_LINGER, "SO_LINGER"),
         (socket.SOL_SOCKET, socket.SO_BROADCAST, "SO_BROADCAST"),
+        (socket.SOL_SOCKET, socket.SO_TYPE, "SO_TYPE"),
         (socket.IPPROTO_TCP, socket.TCP_NODELAY, "TCP_NODELAY"),
     ]
 
