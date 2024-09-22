@@ -10,12 +10,12 @@ import socket
 import logging
 from typing import Optional
 
-logger = logging.getLogger(__name__)
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     encoding='utf-8',
 )
+logger = logging.getLogger(__name__)
 
 class Server():
     def __init__(self, host: str ='localhost', port: int = 5000) -> None:
