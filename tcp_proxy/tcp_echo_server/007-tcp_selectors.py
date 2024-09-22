@@ -5,12 +5,12 @@
 # TODO: add KeyboardInterrupt exception handling
 
 
+import logging
 import selectors
 import socket
-import logging
 from typing import Optional
-from helper import log_socket_optioins, get_socket_options
 
+from helper import get_socket_options, log_socket_optioins
 
 logging.basicConfig(
     level=logging.DEBUG,
