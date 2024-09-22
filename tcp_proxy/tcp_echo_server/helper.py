@@ -29,7 +29,7 @@ def get_socket_options(sock: socket.socket) -> Dict[str, Union[int, str]]:
         (socket.IPPROTO_TCP, socket.TCP_NODELAY, "TCP_NODELAY"),
     ]
 
-    results: Dict[str, Union[int, str]]  = {}
+    results: Dict[str, Union[int, str]] = {}
 
     for level, optname, optstr in socket_options:
         try:
