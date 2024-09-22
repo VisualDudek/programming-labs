@@ -29,6 +29,7 @@ class Server():
 
     def run(self) -> None:
         self.sel = selectors.DefaultSelector()
+        logger.info(f"Selector class in use: {type(self.sel)}")
         self.server_socket = socket.socket()  # Why not AT_INET and SOCK_STREAM?
 
         log_socket_optioins(get_socket_options(self.server_socket))
