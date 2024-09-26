@@ -21,3 +21,7 @@ Easier:
 - code decoupling
 - adding new ways how tcp connections are handled
 - main code logic readability
+- main file is more readable without logging, that now can exist at implementation lvl
+More difficult:
+- lots of imports
+- track explicit knowledge which Protocol given class implements
