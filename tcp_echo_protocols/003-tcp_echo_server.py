@@ -1,4 +1,5 @@
-# add MessageProcessor protocol
+# add protocols:
+# ServerConfig, MessageProcessor, ConnectioHandler, ServerLifecycle
 import socket
 import logging
 from typing import Protocol
