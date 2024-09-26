@@ -10,6 +10,20 @@ class ServerConfig(Protocol):
     def get_port(self) -> int: ...
 
 
+class MessageProcessor(Protocol):
+    def process_message(self, message: bytes) -> bytes: ...
+
+
+class EchoProcessor:
+    def process_message(self, message: bytes) -> bytes:
+        return message
+
+
+class UpperCaseProcessor:
+    def process_message(self, message: bytes) -> bytes:
+        return message.upper()
+
+
 class HardcodedConfig:
     def get_host(self) -> str:
         return "loclahost"
