@@ -14,6 +14,18 @@ class MessageProcessor(Protocol):
     def process_message(self, message: bytes) -> bytes: ...
 
 
+class ConnectionHandler(Protocol):
+    def handle_connection(
+        self, conn: socket.socket, addr, message_processor: MessageProcessor
+    ) -> None: ...
+
+
+class ServerLifecycle(Protocol):
+    def start(self) -> None: ...
+
+    def stop(self) -> None: ...
+
+
 class EchoProcessor:
     def process_message(self, message: bytes) -> bytes:
         return message
