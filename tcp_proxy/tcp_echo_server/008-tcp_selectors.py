@@ -53,6 +53,9 @@ class Server:
                 events = self.sel.select()
                 for key, mask in events:
                     if key.data is None:
+                        # THIS IS CRAZY !!!
+                        # Why we can't use key.fileobj here? -> mypy error
+                        # sock = socket.fromfd(key.fd, socket.AF_INET, socket.SOCK_STREAM)
                         self.accept(key.fileobj)
                     else:
                         self.handle_conn(key, mask)
