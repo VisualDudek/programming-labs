@@ -74,7 +74,7 @@ class Server:
 
     def handle_conn(self, key: selectors.SelectorKey, mask) -> None:
         """ """
-        conn = key.fileobj
+        conn: socket.socket = key.fileobj  # type: ignore
         data = key.data
         if mask & selectors.EVENT_READ:
             recv_data = conn.recv(1024)  # Should be ready
