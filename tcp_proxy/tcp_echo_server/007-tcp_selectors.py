@@ -40,6 +40,7 @@ class Server:
         self.sel.register(self.server_socket, selectors.EVENT_READ, self.accept)
         logger.info(f"Server listening on {self.host}:{self.port}")
 
+        # event loop
         while True:
             events = self.sel.select()
             for key, mask in events:
